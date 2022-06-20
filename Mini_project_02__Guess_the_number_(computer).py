@@ -7,17 +7,25 @@ Idea from https://www.freecodecamp.org/news/python-projects-for-beginners/\n")
 import random
 #print(random.randint(1,20))   #Quick test
 
-random_number = random.randint (1,10)
-x = int(input ("Guess the number: "))
-continue_guessing = True
-# We need a condition for if the input is not a number at all
-while continue_guessing:
-    if random_number == x:
-        print (f"Well done!! The number is {x}")
-        continue_guessing = False
-    elif random_number > x:
-        x = int(input ("It is bigger than you think, can you guess? "))
-    else:
-        x = int(input ("It is smaller than you think, can you guess? "))
+def guess(x):
+    random_number = random.randint (1,x)
+    guess = 0
 
-print("Thank you for playing")
+    #Loop for guessing the number
+    while guess != random_number:
+        try:        #Condition, guess must be a number or ValueError will raise.
+            guess = int(input(f"Guess the number between 1 and {x}: "))
+            if random_number > guess:
+                print ("It is bigger than you think.")
+            elif random_number < guess:
+                print ("It is smaller than you think.")
+        except ValueError:
+            print("Try an integer, please.")
+    print (f"\nWell done!! The number is indeed {random_number}.\nThank you for playing this game.")
+#Input to guess between 1 and user's choice
+try:
+    choice = int(input("Give me an integer number: "))
+except ValueError:
+    print(f"No, not that... an integer (in digits).")
+else:
+    guess (choice)
