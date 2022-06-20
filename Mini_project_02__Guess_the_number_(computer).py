@@ -9,7 +9,7 @@ import random
 
 def guess(x):
     random_number = random.randint (1,x)
-    guess = 0
+    guess = 0 #A number outside the range to let the player guess.
 
     #Loop for guessing the number
     while guess != random_number:
@@ -19,13 +19,25 @@ def guess(x):
                 print ("It is bigger than you think.")
             elif random_number < guess:
                 print ("It is smaller than you think.")
+        #If except is left alone, I can not exit the program in the terminal with Ctrl+C (KeyboardInterruption)
         except ValueError:
             print("Try an integer, please.")
     print (f"\nWell done!! The number is indeed {random_number}.\nThank you for playing this game.")
+
+
 #Input to guess between 1 and user's choice
-try:
-    choice = int(input("Give me an integer number: "))
-except ValueError:
-    print(f"No, not that... an integer (in digits).")
-else:
-    guess (choice)
+for i in range (3):
+    try:
+        choice = int(input("Give me an integer number: "))
+    except ValueError:
+        answer_list = ["You misunderstood",
+         "No, not that... an integer (in digits).",
+         "Alright, I'm done"]
+        print(answer_list[i])
+    else:
+        guess (choice)
+        break
+
+#Sites used for this proyect: 
+#  https://www.w3schools.com/python/python_try_except.asp,
+#  https://docs.python.org/3/library/random.html
